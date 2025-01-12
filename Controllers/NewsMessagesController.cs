@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using WebApplication1.Data;
 using WebApplication1.Models;
 
@@ -13,10 +14,12 @@ namespace WebApplication1.Controllers
     public class NewsMessagesController : Controller
     {
         private readonly TheaterContext _context;
+        private readonly IStringLocalizer<NewsMessagesController> _stringLocalizer;
 
-        public NewsMessagesController(TheaterContext context)
+        public NewsMessagesController(TheaterContext context, IStringLocalizer<NewsMessagesController> localizer)
         {
             _context = context;
+            _stringLocalizer = localizer;
         }
 
         // GET: NewsMessages

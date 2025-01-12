@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Humanizer.Localisation;
+using Microsoft.Extensions.Localization;
+using WebApplication1.Controllers;
 
 namespace WebApplication1.Models
 {
@@ -10,14 +13,17 @@ namespace WebApplication1.Models
     {
         public int? Id { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Titel is vereist.")]
+        [Required(ErrorMessage = "TitleRequired")]
+        [Display(Name ="Title")]
         public string Title { get; set; }
-        
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Bericht mag niet leeg zijn.")]
+
+        [Required(ErrorMessage = "MessageRequired")]
+        [Display(Name = "Message")]
         public string Message { get; set; }
-        
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Bericht mag niet leeg zijn.")]
-		public DateTime Date { get; set; }
+
+        [Required(ErrorMessage = "DateRequired")]
+        [Display(Name = "Date")]
+        public DateTime Date { get; set; }
 
     }
 }
