@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,8 +15,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+   {
+       options.SignIn.RequireConfirmedAccount = true;
+       options.Password.RequiredLength = 8;
+       options.Password.RequiredUniqueChars = 5;
+       options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+       options.Lockout.MaxFailedAccessAttempts = 3;
+       options.User.RequireUniqueEmail = true;
+   }).AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Globalization supported languages
 var supportedCultures = new[] { "nl", "en", "en-US", "nl", "nl-BE" };

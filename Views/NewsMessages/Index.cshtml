@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<WebApplication1.Models.NewsMessage>
+
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
 	ViewData["Title"] = "Index";
@@ -8,9 +12,11 @@
 
 <h1>Index</h1>
 
-<p>
-	<a asp-action="Create">@Localizer.GetString("createNewMessageMessage")</a>
-</p>
+@if(SignInManager.IsSignedIn(User)) {
+	<p>
+		<a asp-action="Create">@Localizer.GetString("createNewMessageMessage")</a>
+	</p>
+}
 
 <div id="content" class="container clearfix">
 	<section class="clearfix">
