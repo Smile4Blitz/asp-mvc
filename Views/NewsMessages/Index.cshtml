@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebApplication1.Models.NewsMessage>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-action="Create">Create New</a>
+</p>
+
+<div id="content" class="container clearfix">
+	<section class="clearfix">
+		<h2 class="structural">Laatste nieuwsberichten van de academie:</h2>
+		<ul>
+			@foreach (var item in Model)
+			{
+				string imagePath = item.Id > 3 ? "/news/default/dummy.jpg" : $"/news/{item.Id}.jpg";
+				<li>
+					<h3>@item.Title</h3>
+					<img src="@imagePath" alt="newsmessage01" width="300" height="135" />
+					<p>|Toegevoegd op: @item.Date</p>
+					<br />
+					<p>
+						@item.Message
+					</p>
+					<a asp-action="Details" asp-route-id="@item.Id" title="Lees meer over dit bericht" class="readmore">Lees meer over @item.Title</a>
+				</li>
+			}
+		</ul>
+	</section>
+</div>
