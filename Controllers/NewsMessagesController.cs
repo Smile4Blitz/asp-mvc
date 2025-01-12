@@ -22,7 +22,9 @@ namespace WebApplication1.Controllers
         // GET: NewsMessages
         public async Task<IActionResult> Index()
         {
-            return View(await _context.NewsMessage.ToListAsync());
+            List<NewsMessage> messages = await _context.NewsMessage.ToListAsync();
+            ViewData["noMessages"] = messages.Count == 0;
+            return View(messages);
         }
 
         // GET: NewsMessages/Details/5

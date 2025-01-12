@@ -12,6 +12,11 @@
 
 <div id="content" class="container clearfix">
 	<section class="clearfix">
+		@if (ViewData["noMessages"] != null && (bool) ViewData["noMessages"]) {
+			<p>No messages.</p>
+		} 
+		else 
+		{
 		<h2 class="structural">Laatste nieuwsberichten van de academie:</h2>
 		<ul>
 			@foreach (var item in Model)
@@ -29,5 +34,6 @@
 				</li>
 			}
 		</ul>
+		}
 	</section>
 </div>
